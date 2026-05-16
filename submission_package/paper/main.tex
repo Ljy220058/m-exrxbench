@@ -54,7 +54,7 @@ This paper addresses these gaps through three contributions:
 
 \section{Challenge Definition}
 
-RuleML+RR Rule Challenge submissions may define challenge proposals and challenge solutions \cite{rulemlrr2026challenge}. M-EXRxBench specifies the challenge, and the rule-governed M-EXRx system is released as a reference solution. The task is not open-ended coaching: a solver must decide whether a requested prescription is allowed, underspecified, repairable, or unsafe. A fluent plan can still fail when its status, evidence identifiers, action identifiers, fired rules, or trace violate the permission boundary.
+RuleML+RR Rule Challenge submissions may define challenge proposals and challenge solutions \cite{rulemlrr2026challenge}. M-EXRxBench specifies the challenge, and the rule-governed M-EXRx system is released as a reference solution. The challenge is to evaluate evidence-bounded exercise prescription agents under rule-governed risk, evidence, repair, and trace constraints. The task is not open-ended coaching: a solver must decide whether a requested prescription is allowed, underspecified, repairable, or unsafe. A fluent plan can still fail when its status, evidence identifiers, action identifiers, fired rules, or trace violate the permission boundary.
 
 \subsection{System-Visible Inputs}
 
@@ -263,7 +263,7 @@ Figure~\ref{fig:decision-coverage} gives a case-level diagnostic view before agg
 
 \subsection{Metrics}
 
-The evaluator computes status accuracy, risk accuracy, unsafe advice rate, unsupported prescription rate, rule violation rate, trace completeness, and repair success rate. The evaluator is the only component that reads \texttt{gold\_labels.jsonl}; systems read only \texttt{system\_visible\_cases.jsonl}.
+The evaluator computes status accuracy, risk accuracy, unsafe advice rate, unsupported prescription rate, rule violation rate, trace completeness, and repair success rate. Correctness in this challenge means benchmark-internal rule consistency: the predicted status, risk trace, forbidden-output boundary, evidence/action support, repair result, and required trace fields must match the evaluator-only specification. Completeness means coverage of the benchmark's declared categories, risk levels, statuses, trace requirements, and supplemental hard cases, not population representativeness or medical correctness. The evaluator is the only component that reads \texttt{gold\_labels.jsonl}; systems read only \texttt{system\_visible\_cases.jsonl}.
 
 \subsection{Main Results}
 

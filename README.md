@@ -15,10 +15,19 @@ Artifact path in the repository: branch root.
 Run from the artifact directory:
 
 ```powershell
-conda run -n torch2.5.1 python demo\validate_artifacts.py
 conda run -n torch2.5.1 python benchmark\validate_traceable_dataset.py
+conda run -n torch2.5.1 python demo\validate_artifacts.py
 powershell -ExecutionPolicy Bypass -File reproducibility\run_all.ps1
 powershell -ExecutionPolicy Bypass -File reproducibility\run_hard100.ps1
+```
+
+Successful validation/reproduction prints these sentinels:
+
+```text
+traceable_dataset_validation_ok
+artifact_validation_ok
+m_exrx_reproducibility_ok
+m_exrx_hard100_reproducibility_ok
 ```
 
 The default reproduction script is the main verification path. It regenerates
@@ -36,6 +45,7 @@ artifacts/demo_runs/single_red_flag.json
 artifacts/demo_runs/full_rule_governed_v04.json
 artifacts/demo_runs/full_rule_governed_eval_summary.md
 artifacts/demo_runs/hard100_full_rule_governed_eval_summary.md
+artifacts/demo_runs/example_flow_trace.json
 artifacts/baseline_runs/
 demo/static_trace_viewer.html
 submission_package/A_Trace-Governed_Rule_Challenge_for_Evidence-Bounded_Exercise_Prescription.pdf
@@ -62,6 +72,7 @@ start demo\static_trace_viewer.html
 - Current hard100 reference result: status accuracy 0.670, risk accuracy 0.720, unsafe-advice rate 0.090, unsupported-prescription rate 0.000, trace completeness 1.000.
 - System-visible and evaluator-only gold splits.
 - Rule-basis source registry and case-to-rule-basis maps for the default 500 cases and the hard100 subset.
+- Reviewer-facing evidence notes for challenge definition, correctness/completeness, leakage control, traceability, reference-system behavior, hard100 analysis, and a concrete R2 example flow.
 - RiskGate, EvidenceGate, PrescriptionContract, Rule Auditor, and bounded repair specifications.
 - Deterministic demo runner, benchmark runner, baselines, evaluator, schema validator, and trace viewer.
 - CEURART manuscript source and compiled PDF.
@@ -99,6 +110,10 @@ The labels are guideline/literature/protocol-informed synthetic annotations. The
 - Traceability registry: `benchmark\rule_basis_sources.json` and `benchmark\rule_basis_sources.md`.
 - Case-to-rule-basis maps: `benchmark\case_to_rule_basis_map.jsonl` and `benchmark\hard_case_to_rule_basis_map.jsonl`.
 - Precomputed outputs: `artifacts\demo_runs\` and `artifacts\baseline_runs\`.
+- Concrete example flow: `benchmark\concrete_example_flow.md` with runner-generated trace `artifacts\demo_runs\example_flow_trace.json`.
+- Hard100 interpretation note: `benchmark\hard100_boundary_analysis.md`.
+- Correctness/completeness note: `benchmark\benchmark_correctness_and_completeness_argument.md`.
+- Leakage-control note: `benchmark\leakage_control_report.md`.
 - Runtime randomness: none. The scripts do not sample, shuffle, call stochastic
   models, or use randomized search. Dataset fields such as `source_seed_id` are
   synthetic-case provenance labels, not runtime random seeds.
